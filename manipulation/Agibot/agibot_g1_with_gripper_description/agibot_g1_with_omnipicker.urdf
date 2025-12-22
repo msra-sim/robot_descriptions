@@ -635,6 +635,7 @@
     <child link="right_base_link"/>
     <origin rpy="-1.5707963267948966 0.0 3.141592653589793" xyz="0.0 -0.025 0.0"/>
   </joint>
+  
   <link name="right_camera_stand"/>
   <joint name="right_camera_stand_joint" type="fixed">
     <!-- 根据法兰盘的厚度调整z值 -->
@@ -642,12 +643,24 @@
     <parent link="right_end_link"/>
     <child link="right_camera_stand"/>
   </joint>
-  <link name="left_camera_stand"/>
-  <joint name="left_camera_stand_joint" type="fixed">
-    <origin xyz="0.0 0.0 0.005"/>
+  <link name="left_camera_stand">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/camera/120s_camera_stand.obj"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="left_camera_stand_base_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0"/>
     <parent link="arm_l_end_link"/>
     <child link="left_camera_stand"/>
   </joint>
+  <joint name="left_camera_stand_mount_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.005"/>
+    <parent link="left_camera_stand"/>
+    <child link="left_camera_stand_end"/>
+  </joint>
+  <link name="left_camera_stand_end"/>
   <!-- <xacro:omni-picker/> -->
   <!-- 3. 展开 G1 本体（base + 双臂 + eef） -->
   <!-- <xacro:agibot_g1_no_gripper/> -->
