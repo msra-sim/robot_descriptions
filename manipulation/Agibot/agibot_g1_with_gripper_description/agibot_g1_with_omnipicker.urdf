@@ -641,12 +641,13 @@
   <link name="right_camera_stand">
     <visual>
       <geometry>
-        <mesh filename="meshes/camera/120s_camera_stand.obj"/>
+        <mesh filename="meshes/camera/omni_picker_camera_stand.obj"/>
       </geometry>
     </visual>
   </link>
   <joint name="right_camera_stand_joint" type="fixed">
-    <origin xyz="0.0 0.0 0.0"/> 
+    <!-- 根据法兰盘的厚度调整z值, -1/2 the flange height -->
+    <origin xyz="0.0 0.0 -0.0025"/> 
     <parent link="arm_r_end_link"/>
     <child link="right_camera_stand"/>
   </joint>
@@ -662,12 +663,12 @@
   <link name="left_camera_stand">
     <visual>
       <geometry>
-        <mesh filename="meshes/camera/120s_camera_stand.obj"/>
+        <mesh filename="meshes/camera/omni_picker_camera_stand.obj"/>
       </geometry>
     </visual>
   </link>
   <joint name="left_camera_stand_base_joint" type="fixed">
-    <origin xyz="0.0 0.0 0.0"/>
+    <origin xyz="0.0 0.0 -0.0025"/>
     <parent link="arm_l_end_link"/>
     <child link="left_camera_stand"/>
   </joint>
