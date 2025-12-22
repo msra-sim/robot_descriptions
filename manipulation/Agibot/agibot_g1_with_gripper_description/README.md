@@ -1,5 +1,7 @@
 # Agibot G1 with Gripper Description
 
+![Agibot G1 with Omni-Picker](../.images/agibot_g1_with_omnipicker.png)
+
 ## Available URDFs
 - **agibot_g1_with_omnipicker.urdf** - G1 robot with Omni-Picker grippers (documented below)
 - **agibot_g1_with_120s.urdf** - G1 robot with 120S grippers (TBD)
