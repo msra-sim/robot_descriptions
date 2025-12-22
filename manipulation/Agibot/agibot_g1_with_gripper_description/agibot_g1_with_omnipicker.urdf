@@ -549,7 +549,7 @@
       </geometry>
     </collision>
   </link>
-  <link name="right_end_link">
+  <link name="arm_r_end_link">
     <inertial>
       <origin xyz="-7.5134e-05 -0.00024521 -0.016705"/>
       <mass value="0.06158"/>
@@ -613,7 +613,7 @@
   <joint name="right_joint7" type="revolute">
     <origin rpy="1.5707963267948966 0.0 0.0" xyz="0.0 -0.1805 0.0"/>
     <parent link="right_link6"/>
-    <child link="right_end_link"/>
+    <child link="arm_r_end_link"/>
     <axis xyz="0.0 0.0 -1.0"/>
     <limit effort="30.0" lower="-3.10" upper="3.10" velocity="3.14"/>
   </joint>
@@ -636,13 +636,29 @@
     <origin rpy="-1.5707963267948966 0.0 3.141592653589793" xyz="0.0 -0.025 0.0"/>
   </joint>
   
-  <link name="right_camera_stand"/>
+  
+  <!-- Mount right camera stand with flange height consideration  -->
+  <link name="right_camera_stand">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/camera/120s_camera_stand.obj"/>
+      </geometry>
+    </visual>
+  </link>
   <joint name="right_camera_stand_joint" type="fixed">
-    <!-- 根据法兰盘的厚度调整z值 -->
-    <origin xyz="0.0 0.0 0.005"/> 
-    <parent link="right_end_link"/>
+    <origin xyz="0.0 0.0 0.0"/> 
+    <parent link="arm_r_end_link"/>
     <child link="right_camera_stand"/>
   </joint>
+  <joint name="right_camera_stand_mount_joint" type="fixed">
+    <!-- 根据法兰盘的厚度调整z值 -->
+    <origin xyz="0.0 0.0 0.005"/>
+    <parent link="right_camera_stand"/>
+    <child link="right_camera_stand_end"/>
+  </joint>
+  <link name="right_camera_stand_end"/>
+
+  <!-- Mount left camera stand with flange height consideration  -->
   <link name="left_camera_stand">
     <visual>
       <geometry>
@@ -656,11 +672,14 @@
     <child link="left_camera_stand"/>
   </joint>
   <joint name="left_camera_stand_mount_joint" type="fixed">
+    <!-- 根据法兰盘的厚度调整z值 -->
     <origin xyz="0.0 0.0 0.005"/>
     <parent link="left_camera_stand"/>
     <child link="left_camera_stand_end"/>
   </joint>
   <link name="left_camera_stand_end"/>
+
+
   <!-- <xacro:omni-picker/> -->
   <!-- 3. 展开 G1 本体（base + 双臂 + eef） -->
   <!-- <xacro:agibot_g1_no_gripper/> -->
@@ -1117,17 +1136,17 @@
   <!-- 5. 挂载夹爪到 eef（根据你 URDF 里的 link 名） -->
   <!-- 左臂：left_camera_stand → gripper_l_base_link -->
   <joint name="left_gripper_mount" type="fixed">
-    <parent link="left_camera_stand"/>
+    <parent link="left_camera_stand_end"/>
     <!-- 来自 G1 URDF -->
     <child link="gripper_l_base_link"/>
     <!-- 来自 omni-picker (name="left") -->
     <!-- 先用 0,0,0 debug，之后再调 offset / rpy -->
     <!--pure +90 degree yaw about Z-->
-    <origin xtz="0 0 0" rpy="0 0 1.57079632679"/>
+    <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
   </joint>
   <!-- 右臂：right_camera_stand → gripper_r_base_link -->
   <joint name="right_gripper_mount" type="fixed">
-    <parent link="right_camera_stand"/>
+    <parent link="right_camera_stand_end"/>
     <child link="gripper_r_base_link"/>
     <!-- 如果左右朝向需要对称，可以这里加一个 yaw=π 之类 -->
     <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
