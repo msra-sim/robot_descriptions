@@ -359,7 +359,7 @@
       </geometry>
     </collision>
   </link>
-  <link name="left_end_link">
+  <link name="arm_l_end_link">
     <inertial>
       <origin xyz="-7.5134e-05 -0.00024521 -0.016705"/>
       <mass value="0.06158"/>
@@ -423,7 +423,7 @@
   <joint name="left_joint7" type="revolute">
     <origin rpy="1.5707963267948966 0.0 0.0" xyz="0.0 -0.1805 0.0"/>
     <parent link="left_link6"/>
-    <child link="left_end_link"/>
+    <child link="arm_l_end_link"/>
     <axis xyz="0.0 0.0 1.0"/>
     <limit effort="30.0" lower="-3.10" upper="3.10" velocity="3.14"/>
   </joint>
@@ -635,23 +635,23 @@
     <child link="right_base_link"/>
     <origin rpy="-1.5707963267948966 0.0 3.141592653589793" xyz="0.0 -0.025 0.0"/>
   </joint>
-  <link name="right_eef"/>
-  <joint name="right_eef_joint" type="fixed">
-    <!-- 根据法兰盘的厚度调整z值，default给个0.015  -->
-    <origin xyz="0.0 0.0 0.015"/> 
+  <link name="right_camera_stand"/>
+  <joint name="right_camera_stand_joint" type="fixed">
+    <!-- 根据法兰盘的厚度调整z值 -->
+    <origin xyz="0.0 0.0 0.005"/> 
     <parent link="right_end_link"/>
-    <child link="right_eef"/>
+    <child link="right_camera_stand"/>
   </joint>
-  <link name="left_eef"/>
-  <joint name="left_eef_joint" type="fixed">
-    <origin xyz="0.0 0.0 0.015"/>
-    <parent link="left_end_link"/>
-    <child link="left_eef"/>
+  <link name="left_camera_stand"/>
+  <joint name="left_camera_stand_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.005"/>
+    <parent link="arm_l_end_link"/>
+    <child link="left_camera_stand"/>
   </joint>
   <!-- <xacro:omni-picker/> -->
   <!-- 3. 展开 G1 本体（base + 双臂 + eef） -->
   <!-- <xacro:agibot_g1_no_gripper/> -->
-  <link name="left_gripper_base">
+  <link name="gripper_l_base_link">
     <inertial>
       <origin xyz="-0.00005520 1.2341E-05 0.03296193"/>
       <mass value="0.25641368"/>
@@ -682,7 +682,7 @@
   </link>
   <joint name="left_gripper_joint" type="revolute">
     <origin rpy="-2.9951 -1.5707963267948966 -0.15964" xyz="0 -0.0195 0.0565"/>
-    <parent link="left_gripper_base"/>
+    <parent link="gripper_l_base_link"/>
     <child link="left_narrow1_Link"/>
     <axis xyz="0 0 1"/>
     <limit effort="50" lower="0" upper="1" velocity="3.141592653589793"/>
@@ -764,7 +764,7 @@
   </link>
   <joint name="left_narrow_loop_joint" type="revolute">
     <origin rpy="-2.9951 -1.5707963267948966 -0.15964" xyz="0 -0.021633 0.07387"/>
-    <parent link="left_gripper_base"/>
+    <parent link="gripper_l_base_link"/>
     <child link="left_narrow_loop_Link"/>
     <axis xyz="0 0 1"/>
     <limit effort="50" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793"/>
@@ -789,7 +789,7 @@
   </link>
   <joint name="left_wide1_joint" type="revolute">
     <origin rpy="-2.9951 -1.5707963267948966 -0.15964" xyz="0 0.0195 0.0565"/>
-    <parent link="left_gripper_base"/>
+    <parent link="gripper_l_base_link"/>
     <child link="left_wide1_Link"/>
     <axis xyz="0 0 -1"/>
     <limit effort="50" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793"/>
@@ -870,13 +870,13 @@
   </link>
   <joint name="left_wide_loop_joint" type="revolute">
     <origin rpy="-2.9951 -1.5707963267948966 -0.15964" xyz="0 0.021633 0.07387"/>
-    <parent link="left_gripper_base"/>
+    <parent link="gripper_l_base_link"/>
     <child link="left_wide_loop_Link"/>
     <axis xyz="0 0 -1"/>
     <limit effort="50" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793"/>
     <mimic joint="left_gripper_joint" multiplier="1.5" offset="0"/>
   </joint>
-  <link name="right_gripper_base">
+  <link name="gripper_r_base_link">
     <inertial>
       <origin xyz="-0.00005520 1.2341E-05 0.03296193"/>
       <mass value="0.25641368"/>
@@ -907,7 +907,7 @@
   </link>
   <joint name="right_gripper_joint" type="revolute">
     <origin rpy="-2.9951 -1.5707963267948966 -0.15964" xyz="0 -0.0195 0.0565"/>
-    <parent link="right_gripper_base"/>
+    <parent link="gripper_r_base_link"/>
     <child link="right_narrow1_Link"/>
     <axis xyz="0 0 1"/>
     <limit effort="50" lower="0" upper="1" velocity="3.141592653589793"/>
@@ -989,7 +989,7 @@
   </link>
   <joint name="right_narrow_loop_joint" type="revolute">
     <origin rpy="-2.9951 -1.5707963267948966 -0.15964" xyz="0 -0.021633 0.07387"/>
-    <parent link="right_gripper_base"/>
+    <parent link="gripper_r_base_link"/>
     <child link="right_narrow_loop_Link"/>
     <axis xyz="0 0 1"/>
     <limit effort="50" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793"/>
@@ -1014,7 +1014,7 @@
   </link>
   <joint name="right_wide1_joint" type="revolute">
     <origin rpy="-2.9951 -1.5707963267948966 -0.15964" xyz="0 0.0195 0.0565"/>
-    <parent link="right_gripper_base"/>
+    <parent link="gripper_r_base_link"/>
     <child link="right_wide1_Link"/>
     <axis xyz="0 0 -1"/>
     <limit effort="50" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793"/>
@@ -1095,28 +1095,29 @@
   </link>
   <joint name="right_wide_loop_joint" type="revolute">
     <origin rpy="-2.9951 -1.5707963267948966 -0.15964" xyz="0 0.021633 0.07387"/>
-    <parent link="right_gripper_base"/>
+    <parent link="gripper_r_base_link"/>
     <child link="right_wide_loop_Link"/>
     <axis xyz="0 0 -1"/>
     <limit effort="50" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793"/>
     <mimic joint="right_gripper_joint" multiplier="1.5" offset="0"/>
   </joint>
   <!-- 5. 挂载夹爪到 eef（根据你 URDF 里的 link 名） -->
-  <!-- 左臂：left_eef → left_gripper_base -->
+  <!-- 左臂：left_camera_stand → gripper_l_base_link -->
   <joint name="left_gripper_mount" type="fixed">
-    <parent link="left_eef"/>
+    <parent link="left_camera_stand"/>
     <!-- 来自 G1 URDF -->
-    <child link="left_gripper_base"/>
+    <child link="gripper_l_base_link"/>
     <!-- 来自 omni-picker (name="left") -->
     <!-- 先用 0,0,0 debug，之后再调 offset / rpy -->
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <!--pure +90 degree yaw about Z-->
+    <origin xtz="0 0 0" rpy="0 0 1.57079632679"/>
   </joint>
-  <!-- 右臂：right_eef → right_gripper_base -->
+  <!-- 右臂：right_camera_stand → gripper_r_base_link -->
   <joint name="right_gripper_mount" type="fixed">
-    <parent link="right_eef"/>
-    <child link="right_gripper_base"/>
+    <parent link="right_camera_stand"/>
+    <child link="gripper_r_base_link"/>
     <!-- 如果左右朝向需要对称，可以这里加一个 yaw=π 之类 -->
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
   </joint>
 </robot>
 
