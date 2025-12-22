@@ -637,7 +637,7 @@
   </joint>
   
   
-  <!-- Mount right camera stand with flange height consideration  -->
+  <!-- Mount right camera stand with flange thickness consideration  -->
   <link name="right_camera_stand">
     <visual>
       <geometry>
@@ -646,7 +646,7 @@
     </visual>
   </link>
   <joint name="right_camera_stand_joint" type="fixed">
-    <!-- 根据法兰盘的厚度调整z值, -1/2 the flange height -->
+    <!-- 根据法兰盘的厚度调整z值, -1/2 the flange thickness -->
     <origin xyz="0.0 0.0 -0.0025"/> 
     <parent link="arm_r_end_link"/>
     <child link="right_camera_stand"/>
@@ -659,7 +659,7 @@
   </joint>
   <link name="right_camera_stand_end"/>
 
-  <!-- Mount left camera stand with flange height consideration  -->
+  <!-- Mount left camera stand with flange thickness consideration  -->
   <link name="left_camera_stand">
     <visual>
       <geometry>
