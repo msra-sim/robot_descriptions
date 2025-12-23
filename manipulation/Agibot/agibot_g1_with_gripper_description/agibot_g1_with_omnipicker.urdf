@@ -718,7 +718,7 @@
     <parent link="gripper_l_base_link"/>
     <child link="left_narrow1_Link"/>
     <axis xyz="0 0 1"/>
-    <limit effort="50" lower="0" upper="1" velocity="3.141592653589793"/>
+    <limit effort="50" lower="0.1" upper="0.78" velocity="3.141592653589793"/>
   </joint>
   <link name="left_narrow2_Link">
     <inertial>
@@ -943,7 +943,7 @@
     <parent link="gripper_r_base_link"/>
     <child link="right_narrow1_Link"/>
     <axis xyz="0 0 1"/>
-    <limit effort="50" lower="0" upper="1" velocity="3.141592653589793"/>
+    <limit effort="50" lower="0.1" upper="0.785" velocity="3.141592653589793"/>
   </joint>
   <link name="right_narrow2_Link">
     <inertial>
