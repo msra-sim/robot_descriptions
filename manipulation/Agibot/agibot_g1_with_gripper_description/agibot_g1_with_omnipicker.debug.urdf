@@ -716,7 +716,7 @@
       <child link="right_narrow2_Link"/>
       <axis xyz="0 0 -1"/>
       <limit effort="50" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793"/>
-      <!-- <mimic joint="right_gripper_joint" multiplier="-0.02" offset="0"/> -->
+      <mimic joint="right_gripper_joint" multiplier="-0.02" offset="0"/>
     </joint>
     
     <!-- 5. 挂载夹爪到 eef（根据你 URDF 里的 link 名） -->
