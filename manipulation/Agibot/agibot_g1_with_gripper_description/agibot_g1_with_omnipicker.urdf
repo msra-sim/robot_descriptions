@@ -1150,7 +1150,7 @@
     <parent link="right_camera_stand_end"/>
     <child link="gripper_r_base_link"/>
     <!-- 如果左右朝向需要对称，可以这里加一个 yaw=π 之类 -->
-    <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
+    <origin xyz="0 0 0" rpy="0 0 -1.57079632679"/>
   </joint>
 </robot>
 
